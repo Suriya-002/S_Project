@@ -86,7 +86,7 @@ def footer():
 
 st.set_page_config(
     page_title="Photovoltaic Defect Classification",
-    page_icon=":mango:",
+    page_icon=":solar_panel:",
     initial_sidebar_state='auto'
 )
 hide_streamlit_style = """
@@ -105,7 +105,6 @@ def prediction_cls(prediction):
 
 
 with st.sidebar:
-    st.image('Images\Clean\Clean (7).jpg')
     st.title("No Defect")
     st.subheader(
         "Accurate classification of defects present in the photovoltaic cells. This helps an user to easily detect the defect and identify it's cause.")
