@@ -1,4 +1,4 @@
-pip install --upgrade Pillow
+!pip install --upgrade Pillow
 
 import streamlit as st
 import tensorflow as tf
