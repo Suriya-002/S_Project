@@ -119,7 +119,7 @@ def prediction_cls(prediction):
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 
-@st.cache_resource(allow_output_mutation=True)
+@st.cache_resource
 def load_model():
     # Load only the model architecture and weights (excluding optimizer state)
     model = tf.keras.models.load_model('efficientnetb0-Photovoltaic Defects-90.14.h5', compile=False)
