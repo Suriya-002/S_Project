@@ -121,21 +121,21 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 
 @st.cache_resource
 def load_model():
-    # Load only the model architecture and weights (excluding optimizer state)
-    model = tf.keras.models.load_model('efficientnetb0-Photovoltaic Defects-90.14.h5', compile=False)
+    learning_rate = 0.001
+decay_rate = 1e-4
 
-    # Specify the weight decay value (e.g., 1e-4)
-    weight_decay = 1e-4
+# Create the legacy optimizer with decay
+optimizer = tf.keras.optimizers.legacy.Optimizer(
+    tf.keras.optimizers.Adam(learning_rate=learning_rate),
+    decay=decay_rate
+)
 
-    # Create a compatible optimizer with weight decay
-    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001, decay=weight_decay)
-
-    # Compile the model with the optimizer
-    model.compile(
-        loss='categorical_crossentropy',
-        optimizer=optimizer,
-        metrics=['accuracy']
-    )
+# Compile your model with the optimizer
+model.compile(
+    loss='categorical_crossentropy',
+    optimizer=optimizer,
+    metrics=['accuracy']
+)
 
     return model
 
