@@ -1,0 +1,7 @@
+class_index,class,height,width
+0,Bird-drop,224,224
+1,Clean,224,224
+2,Dusty,224,224
+3,Electrical-damage,224,224
+4,Physical-Damage,224,224
+5,Snow-Covered,224,224
