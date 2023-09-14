@@ -121,6 +121,7 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 
 @st.cache_resource
 def load_model():
+    model = tf.keras.models.load_model('efficientnetb0-Photovoltaic Defects-90.14.h5', compile=False)
     learning_rate = 0.001
     decay_rate = 1e-4
     optimizer = tf.keras.optimizers.legacy.Optimizer(
@@ -133,7 +134,6 @@ def load_model():
         metrics=['accuracy']
     )
     return model
-
 
 with st.spinner('Model is being loaded..'):
     model = load_model()
