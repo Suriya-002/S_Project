@@ -1,5 +1,5 @@
 streamlit==0.88.0
 tensorflow-cpu
-Pillow==8.2.0
+Pillow
 numpy==1.19.5
 htbuilder
