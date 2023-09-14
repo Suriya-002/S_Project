@@ -122,21 +122,16 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 @st.cache_resource
 def load_model():
     learning_rate = 0.001
-decay_rate = 1e-4
-
-# Create the legacy optimizer with decay
-optimizer = tf.keras.optimizers.legacy.Optimizer(
-    tf.keras.optimizers.Adam(learning_rate=learning_rate),
-    decay=decay_rate
-)
-
-# Compile your model with the optimizer
-model.compile(
-    loss='categorical_crossentropy',
-    optimizer=optimizer,
-    metrics=['accuracy']
-)
-
+    decay_rate = 1e-4
+    optimizer = tf.keras.optimizers.legacy.Optimizer(
+        tf.keras.optimizers.Adam(learning_rate=learning_rate),
+        decay=decay_rate
+    )
+    model.compile(
+        loss='categorical_crossentropy',
+        optimizer=optimizer,
+        metrics=['accuracy']
+    )
     return model
 
 
