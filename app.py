@@ -1,3 +1,5 @@
+pip install --upgrade Pillow
+
 import streamlit as st
 import tensorflow as tf
 import random
