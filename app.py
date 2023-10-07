@@ -1,6 +1,10 @@
 import streamlit as st
-import os
+from PIL import Image, ImageOps
+import numpy as np
 import tensorflow as tf
+import random
+import os
+
 # Define the function to display the image using os.path.join() and forward slashes
 def display_image_with_path(image_path):
     st.image(image_path)
