@@ -43,7 +43,7 @@ def load_model():
     
     # Create a compatible optimizer with weight decay
     weight_decay = 1e-4
-    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001, decay=weight_decay)
+    optimizer = tf.keras.optimizers.legacy.Adam(learning_rate=0.001, decay=weight_decay)
     
     # Compile the model with the optimizer
     model.compile(
