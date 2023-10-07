@@ -128,8 +128,7 @@ else:
 # Footer
 myargs = [
     "Made in ",
-    st.image('https://avatars3.githubusercontent.com/u/45109972?s=400&v=4', width=25, height=25)
-,
+    st.image('https://avatars3.githubusercontent.com/u/45109972?s=400&v=4', use_column_width=True),
     " with ❤️ by Shanthoshini Devi and Sanjay",
     br()
 ]
