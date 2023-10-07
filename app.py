@@ -35,7 +35,7 @@ with st.sidebar:
 @st.cache(allow_output_mutation=True)
 def load_model():
     # Load only the model architecture and weights (excluding optimizer state)
-    model = tf.keras.models.load_model('C:\\Users\\SURIYA\\Documents\\Shantho Project\\efficientnetb0-Photovoltaic Defects-90.14.h5', compile=False)
+    model = tf.keras.models.load_model('efficientnetb0-Photovoltaic Defects-90.14.h5', compile=False)
 
     # Specify the weight decay value (e.g., 1e-4)
     weight_decay = 1e-4
