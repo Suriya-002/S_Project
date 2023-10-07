@@ -1,90 +1,13 @@
 import streamlit as st
-import tensorflow as tf
-import random
-import PIL
-from PIL import Image, ImageOps
-import numpy as np
-from htbuilder import HtmlElement, div, ul, li, br, hr, a, p, img, styles, classes, fonts
-from htbuilder.units import percent, px
-from htbuilder.funcs import rgba, rgb
-import warnings
 import os
 
-warnings.filterwarnings("ignore")
+# Define the function to display the image using os.path.join() and forward slashes
+def display_image_with_path(image_path):
+    st.image(image_path)
 
+# ... (other imports and functions)
 
-
-def image(src_as_string, **style):
-    return img(src=src_as_string, style=styles(**style))
-
-
-def link(link, text, **style):
-    return a(_href=link, _target="_blank", style=styles(**style))(text)
-
-
-def layout(*args):
-
-    style = """
-    <style>
-      # MainMenu {visibility: hidden;}
-      footer {visibility: hidden;}
-     .stApp { bottom: 105px; }
-    </style>
-    """
-
-    style_div = styles(
-        position="fixed",
-        left=0,
-        bottom=0,
-        margin=px(0, 0, 0, 0),
-        width=percent(100),
-        color="white",
-        text_align="center",
-        height="auto",
-        opacity=1
-    )
-
-    style_hr = styles(
-        display="block",
-        margin=px(8, 8, "auto", "auto"),
-        border_style="inset",
-        border_width=px(2)
-    )
-
-    body = p()
-    foot = div(
-        style=style_div
-    )(
-        hr(
-            style=style_hr
-        ),
-        body
-    )
-
-    st.markdown(style, unsafe_allow_html=True)
-
-    for arg in args:
-        if isinstance(arg, str):
-            body(arg)
-
-        elif isinstance(arg, HtmlElement):
-            body(arg)
-
-    st.markdown(str(foot), unsafe_allow_html=True)
-
-
-def footer():
-    myargs = [
-        "Made in ",
-        image('https://avatars3.githubusercontent.com/u/45109972?s=400&v=4',
-              width=px(25), height=px(25)),
-        " with ❤️ by Shanthoshini Devi and Sanjay",
-        br()
-    ]
-    layout(*myargs)
-
-
-
+# Your other functions and code here
 
 st.set_page_config(
     page_title="Photovoltaic Defect Classification",
@@ -99,32 +22,15 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-
 def prediction_cls(prediction):
     for key, clss in class_names.items():
         if np.argmax(prediction) == clss:
             return key
-
 
 with st.sidebar:
-   st.title("No Defect")
-   st.subheader("Accurate classification of defects present in the photovoltaic cells.")
-   image_path = os.path.join('Images', 'Clean', 'Clean (7).jpg')
-   display_image_with_path(image_path)
-   st.subheader(
-        "Accurate classification of defects present in the photovoltaic cells. This helps an user to easily detect the defect and identify it's cause.")
-
-
-def prediction_cls(prediction):
-    for key, clss in class_names.items():
-        if np.argmax(prediction) == clss:
-            return key
-
-
-st.set_option('deprecation.showfileUploaderEncoding', False)
-
-
-import tensorflow as tf
+    st.image('Images/Clean/Clean (7).jpg')
+    st.title("No Defect")
+    st.subheader("Accurate classification of defects present in the photovoltaic cells.")
 
 @st.cache(allow_output_mutation=True)
 def load_model():
@@ -135,7 +41,7 @@ def load_model():
     weight_decay = 1e-4
 
     # Create a compatible optimizer with weight decay
-    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
+    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001, decay=weight_decay)
 
     # Compile the model with the optimizer
     model.compile(
@@ -145,8 +51,6 @@ def load_model():
     )
 
     return model
-
-
 
 with st.spinner('Model is being loaded..'):
     model = load_model()
@@ -158,23 +62,13 @@ st.write("""
 
 file = st.file_uploader("", type=["jpg", "png"])
 
-
-from PIL import Image, ImageOps  # Import Image from PIL
-
-# ...
-
 def import_and_predict(image_data, model):
     size = (224, 224)
-    
-    # Resize the image with a valid resampling filter (e.g., Image.LANCZOS for anti-aliasing)
-    image = ImageOps.fit(image_data, size, Image.LANCZOS)
-    
+    image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
     img = np.asarray(image)
     img_reshape = img[np.newaxis, ...]
     prediction = model.predict(img_reshape)
     return prediction
-
-
 
 if file is None:
     st.text("Please upload an image file")
@@ -223,22 +117,12 @@ else:
         st.info(
             "Gently remove snow using a soft brush or a long-handled tool.Ensure the panels are clear to maximize sunlight absorption.Monitor and clear snow regularly during winter months.")
 
-
-from PIL import Image, ImageOps  # Import Image from PIL
-
-# ...
-
-def display_image(src_as_string, **style):
-    return img(src=src_as_string, style=styles(**style))
-
-# ...
-
-def footer():
-    myargs = [
-        "Made in ",
-        display_image('https://avatars3.githubusercontent.com/u/45109972?s=400&v=4',
-                      width=px(25), height=px(25)),
-        " with ❤️ by Shanthoshini Devi and Sanjay",
-        br()
-    ]
-    layout(*myargs)
+# Footer
+myargs = [
+    "Made in ",
+    image('https://avatars3.githubusercontent.com/u/45109972?s=400&v=4',
+          width=px(25), height=px(25)),
+    " with ❤️ by Shanthoshini Devi and Sanjay",
+    br()
+]
+layout(*myargs)
