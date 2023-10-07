@@ -1,6 +1,7 @@
 import streamlit as st
 import tensorflow as tf
 import random
+import PIL
 from PIL import Image, ImageOps
 import numpy as np
 from htbuilder import HtmlElement, div, ul, li, br, hr, a, p, img, styles, classes, fonts
@@ -86,7 +87,7 @@ def footer():
 
 st.set_page_config(
     page_title="Photovoltaic Defect Classification",
-    page_icon=":solar_panel:",
+    page_icon=":mango:",
     initial_sidebar_state='auto'
 )
 hide_streamlit_style = """
@@ -105,6 +106,7 @@ def prediction_cls(prediction):
 
 
 with st.sidebar:
+    st.image('Images\Clean\Clean (7).jpg')
     st.title("No Defect")
     st.subheader(
         "Accurate classification of defects present in the photovoltaic cells. This helps an user to easily detect the defect and identify it's cause.")
@@ -119,21 +121,29 @@ def prediction_cls(prediction):
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 
-@st.cache_resource
+import tensorflow as tf
+
+@st.cache(allow_output_mutation=True)
 def load_model():
-    model = tf.keras.models.load_model('efficientnetb0-Photovoltaic Defects-90.14.h5', compile=False)
-    learning_rate = 0.001
-    decay_rate = 1e-4
-    optimizer = tf.keras.optimizers.legacy.Optimizer(
-        tf.keras.optimizers.Adam(learning_rate=learning_rate),
-        decay=decay_rate
-    )
+    # Load only the model architecture and weights (excluding optimizer state)
+    model = tf.keras.models.load_model('C:\\Users\\SURIYA\\Documents\\Shantho Project\\efficientnetb0-Photovoltaic Defects-90.14.h5', compile=False)
+
+    # Specify the weight decay value (e.g., 1e-4)
+    weight_decay = 1e-4
+
+    # Create a compatible optimizer with weight decay
+    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
+
+    # Compile the model with the optimizer
     model.compile(
         loss='categorical_crossentropy',
         optimizer=optimizer,
         metrics=['accuracy']
     )
+
     return model
+
+
 
 with st.spinner('Model is being loaded..'):
     model = load_model()
@@ -146,13 +156,21 @@ st.write("""
 file = st.file_uploader("", type=["jpg", "png"])
 
 
+from PIL import Image, ImageOps  # Import Image from PIL
+
+# ...
+
 def import_and_predict(image_data, model):
     size = (224, 224)
-    image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
+    
+    # Resize the image with a valid resampling filter (e.g., Image.LANCZOS for anti-aliasing)
+    image = ImageOps.fit(image_data, size, Image.LANCZOS)
+    
     img = np.asarray(image)
     img_reshape = img[np.newaxis, ...]
     prediction = model.predict(img_reshape)
     return prediction
+
 
 
 if file is None:
@@ -203,4 +221,21 @@ else:
             "Gently remove snow using a soft brush or a long-handled tool.Ensure the panels are clear to maximize sunlight absorption.Monitor and clear snow regularly during winter months.")
 
 
-footer()
+from PIL import Image, ImageOps  # Import Image from PIL
+
+# ...
+
+def display_image(src_as_string, **style):
+    return img(src=src_as_string, style=styles(**style))
+
+# ...
+
+def footer():
+    myargs = [
+        "Made in ",
+        display_image('https://avatars3.githubusercontent.com/u/45109972?s=400&v=4',
+                      width=px(25), height=px(25)),
+        " with ❤️ by Shanthoshini Devi and Sanjay",
+        br()
+    ]
+    layout(*myargs)
