@@ -34,14 +34,17 @@ with st.sidebar:
 
 @st.cache(allow_output_mutation=True)
 def load_model():
-    # Load only the model architecture and weights (excluding optimizer state)
-    model = tf.keras.models.load_model('efficientnetb0-Photovoltaic Defects-90.14.h5', compile=False)
+    # Update the path to the model file on the deployment environment
+    model_path = 'efficientnetb0-Photovoltaic Defects-90.14.h5'
+    
+    # Load the model
+    model = tf.keras.models.load_model(model_path, compile=False)
 
     # Specify the weight decay value (e.g., 1e-4)
     weight_decay = 1e-4
 
-    # Create a compatible optimizer with weight decay
-    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001, decay=weight_decay)
+    # Create a compatible optimizer with weight decay using the legacy optimizer
+    optimizer = tf.keras.optimizers.legacy.Adam(learning_rate=0.001, decay=weight_decay)
 
     # Compile the model with the optimizer
     model.compile(
@@ -51,6 +54,7 @@ def load_model():
     )
 
     return model
+
 
 with st.spinner('Model is being loaded..'):
     model = load_model()
