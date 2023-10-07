@@ -67,7 +67,7 @@ file = st.file_uploader("", type=["jpg", "png"])
 # Function to preprocess and make predictions
 def import_and_predict(image_data, model):
     size = (224, 224)
-    image = ImageOps.fit(image_data, size, Image.ANTIALIAS)  # Use Image.ANTIALIAS
+    image = ImageOps.fit(image_data, size, 'antialias')  # Use 'antialias' as the resampling filter
     img = np.asarray(image)
     img_reshape = img[np.newaxis, ...]
     prediction = model.predict(img_reshape)
