@@ -106,8 +106,14 @@ def prediction_cls(prediction):
 
 
 with st.sidebar:
-    st.image('Images\Clean\Clean (7).jpg')
-    st.title("No Defect")
+   st.title("No Defect")
+    st.subheader("Accurate classification of defects present in the photovoltaic cells.")
+
+    # Define the image path using os.path.join() and forward slashes
+    image_path = os.path.join('Images', 'Clean', 'Clean (7).jpg')
+
+    # Display the image using the function and path
+    display_image_with_path(image_path)
     st.subheader(
         "Accurate classification of defects present in the photovoltaic cells. This helps an user to easily detect the defect and identify it's cause.")
 
