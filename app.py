@@ -79,10 +79,10 @@ else:
     st.image(image, use_column_width=True)
     predictions = import_and_predict(image, model)
     x = random.randint(98, 99) + random.randint(0, 99) * 0.01
-    st.sidebar.error("Accuracy : " + str(x) + " %")
+    st.sidebar.error(f"<p style='font-size: 24px;'><b>Accuracy : {str(x)} %</b></p>", unsafe_allow_html=True)
 
     detected_defect = prediction_cls(predictions)
-    st.sidebar.warning(f"Detected Defect: {detected_defect}")
+    st.sidebar.warning(f"<p style='font-size: 24px;'><b>Detected Defect: {detected_defect}</b></p>", unsafe_allow_html=True)
 
     # Provide remedies based on detected defect
     if detected_defect == 'Clean':
@@ -135,4 +135,4 @@ else:
         st.markdown(snow_covered_remedies, unsafe_allow_html=True)
 
 # Footer
-st.markdown("Made by Shanthoshini Devi and Sanjay")
+st.markdown("<p style='font-size: 16px;'>Made by Shanthoshini Devi and Sanjay</p>", unsafe_allow_html=True)
