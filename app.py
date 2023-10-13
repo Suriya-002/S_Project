@@ -1,7 +1,7 @@
 import streamlit as st
-import tensorflow as tf
 from PIL import Image, ImageOps
 import numpy as np
+import tensorflow as tf
 import random
 
 # Function to display an image with a given path
@@ -88,37 +88,52 @@ else:
     # Provide remedies based on detected defect
     if detected_defect == 'Clean':
         st.markdown("## Remedies")
-        st.info('No Defect is Found. It is clean.')
+        st.markdown("<p style='color: black;'>No Defect is Found. It is clean.</p>", unsafe_allow_html=True)
 
     elif detected_defect == 'Bird Drop':
         st.markdown("## Remedies")
-        st.info("1. Install bird deterrent devices like spikes or netting around the solar panels to prevent birds from landing.")
-        st.info("2. Regularly clean and maintain the panels to remove bird droppings, reducing their attraction to the area.")
-        st.info("3. Consider using scare tactics like decoy predators or ultrasonic repellents to deter birds from approaching the panels.")
+        bird_drop_remedies = """
+        <p style='color: black;'>1. Install bird deterrent devices like spikes or netting around the solar panels to prevent birds from landing.</p>
+        <p style='color: black;'>2. Regularly clean and maintain the panels to remove bird droppings, reducing their attraction to the area.</p>
+        <p style='color: black;'>3. Consider using scare tactics like decoy predators or ultrasonic repellents to deter birds from approaching the panels.</p>
+        """
+        st.markdown(bird_drop_remedies, unsafe_allow_html=True)
 
     elif detected_defect == 'Dusty':
         st.markdown("## Remedies")
-        st.info("1. Clean panels periodically with water and a soft brush to remove dust and dirt.")
-        st.info("2. Consider automated cleaning systems or rain for natural cleaning.")
-        st.info("3. Schedule professional inspections for heavy or persistent dust buildup.")
+        dusty_remedies = """
+        <p style='color: black;'>1. Clean panels periodically with water and a soft brush to remove dust and dirt.</p>
+        <p style='color: black;'>2. Consider automated cleaning systems or rain for natural cleaning.</p>
+        <p style='color: black;'>3. Schedule professional inspections for heavy or persistent dust buildup.</p>
+        """
+        st.markdown(dusty_remedies, unsafe_allow_html=True)
 
     elif detected_defect == 'Electrical-damage':
         st.markdown("## Remedies")
-        st.info("1. Isolate the damaged panel to prevent further issues in the array.")
-        st.info("2. Consult a certified solar technician to assess and repair the damage.")
-        st.info("3. Regularly inspect and maintain your solar panel system to prevent future electrical issues.")
+        electrical_damage_remedies = """
+        <p style='color: black;'>1. Isolate the damaged panel to prevent further issues in the array.</p>
+        <p style='color: black;'>2. Consult a certified solar technician to assess and repair the damage.</p>
+        <p style='color: black;'>3. Regularly inspect and maintain your solar panel system to prevent future electrical issues.</p>
+        """
+        st.markdown(electrical_damage_remedies, unsafe_allow_html=True)
 
     elif detected_defect == 'Physical Damage':
         st.markdown("## Remedies")
-        st.info("1. Examine the extent of physical damage, identifying cracks or breaks in the panels.")
-        st.info("2. Depending on the severity, either repair the damaged sections or replace the affected panels to restore optimal functionality.")
-        st.info("3. Implement regular maintenance practices to prevent further damage and ensure the longevity of your solar panels.")
+        physical_damage_remedies = """
+        <p style='color: black;'>1. Examine the extent of physical damage, identifying cracks or breaks in the panels.</p>
+        <p style='color: black;'>2. Depending on the severity, either repair the damaged sections or replace the affected panels to restore optimal functionality.</p>
+        <p style='color: black;'>3. Implement regular maintenance practices to prevent further damage and ensure the longevity of your solar panels.</p>
+        """
+        st.markdown(physical_damage_remedies, unsafe_allow_html=True)
 
     elif detected_defect == 'Snow-Covered':
         st.markdown("## Remedies")
-        st.info("1. Gently remove snow using a soft brush or a long-handled tool.")
-        st.info("2. Ensure the panels are clear to maximize sunlight absorption.")
-        st.info("3. Monitor and clear snow regularly during winter months.")
+        snow_covered_remedies = """
+        <p style='color: black;'>1. Gently remove snow using a soft brush or a long-handled tool.</p>
+        <p style='color: black;'>2. Ensure the panels are clear to maximize sunlight absorption.</p>
+        <p style='color: black;'>3. Monitor and clear snow regularly during winter months.</p>
+        """
+        st.markdown(snow_covered_remedies, unsafe_allow_html=True)
 
 # Footer
 st.markdown("Made by Shanthoshini Devi and Sanjay")
