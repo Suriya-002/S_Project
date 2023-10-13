@@ -81,12 +81,17 @@ else:
     x = random.randint(98, 99) + random.randint(0, 99) * 0.01
     detected_defect = prediction_cls(predictions)
 
-    # Display accuracy in the sidebar with larger font size and bold text
+    # Display accuracy in the sidebar with larger font size and red box
     st.sidebar.markdown(
-        f"<p style='font-size: 24px; font-weight: bold;'>Accuracy : {x:.2f} %</p>", 
+        f"<div style='font-size: 32px; font-weight: bold; color: white; background-color: red; padding: 10px; text-align: center;'>Accuracy: {x:.2f} %</div>", 
         unsafe_allow_html=True
     )
-    st.sidebar.warning(f"<p style='font-size: 18px;'>Detected Defect: {detected_defect}</p>")
+
+    # Display detected defect with larger font size and yellow box
+    st.sidebar.markdown(
+        f"<div style='font-size: 24px; font-weight: bold; color: black; background-color: yellow; padding: 10px; text-align: center;'>Detected Defect: {detected_defect}</div>",
+        unsafe_allow_html=True
+    )
 
     # Provide remedies based on detected defect
     if detected_defect == 'Clean':
@@ -140,3 +145,4 @@ else:
 
 # Footer
 st.markdown("Made by Shanthoshini Devi and Sanjay")
+
