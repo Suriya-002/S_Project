@@ -32,8 +32,7 @@ def prediction_cls(prediction):
 # Sidebar content
 with st.sidebar:
     st.image('Images/Clean/Clean (7).jpg')
-    st.title("No Defect")
-    st.subheader("Accurate classification of defects present in the photovoltaic cells.")
+    st.title("Accurate classification of defects present in the photovoltaic cells.")
 
 # Load the model
 @st.cache(allow_output_mutation=True)
