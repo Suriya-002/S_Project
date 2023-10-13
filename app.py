@@ -79,12 +79,14 @@ else:
     st.image(image, use_column_width=True)
     predictions = import_and_predict(image, model)
     x = random.randint(98, 99) + random.randint(0, 99) * 0.01
-
-    # Display accuracy in bold and with a larger font size in the sidebar
-    st.experimental_set_query_params(acc=str(x))
     detected_defect = prediction_cls(predictions)
-    st.sidebar.warning(f"<p style='font-size: 24px;'><b>Accuracy : {x:.2f} %</b></p>")
-    st.sidebar.warning(f"Detected Defect: {detected_defect}")
+
+    # Display accuracy in the sidebar with larger font size and bold text
+    st.sidebar.markdown(
+        f"<p style='font-size: 24px; font-weight: bold;'>Accuracy : {x:.2f} %</p>", 
+        unsafe_allow_html=True
+    )
+    st.sidebar.warning(f"<p style='font-size: 18px;'>Detected Defect: {detected_defect}</p>")
 
     # Provide remedies based on detected defect
     if detected_defect == 'Clean':
