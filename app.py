@@ -121,4 +121,4 @@ else:
         st.info("3. Monitor and clear snow regularly during winter months.")
 
 # Footer
-st.markdown("Made with ❤️ by Shanthoshini Devi and Sanjay")
+st.markdown("Made by Shanthoshini Devi and Sanjay")
