@@ -81,8 +81,7 @@ else:
     x = random.randint(98, 99) + random.randint(0, 99) * 0.01
 
     # Display accuracy in bold and with a larger font size in the sidebar
-    st.sidebar.markdown(f"<p style='font-size: 24px;'><b>Accuracy : {str(x)} %</b></p>", unsafe_allow_html=True)
-
+    st.experimental_set_query_params(acc=str(x))
     detected_defect = prediction_cls(predictions)
     st.sidebar.warning(f"Detected Defect: {detected_defect}")
 
