@@ -83,6 +83,7 @@ else:
     # Display accuracy in bold and with a larger font size in the sidebar
     st.experimental_set_query_params(acc=str(x))
     detected_defect = prediction_cls(predictions)
+    st.sidebar.warning(f"<p style='font-size: 24px;'><b>Accuracy : {x:.2f} %</b></p>")
     st.sidebar.warning(f"Detected Defect: {detected_defect}")
 
     # Provide remedies based on detected defect
